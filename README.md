@@ -10,6 +10,41 @@ Just a place for some basic examples
     4. Commit the command statements on connection
     5. Close the connection
 
+## Example usage of DbTests:
+
+```python
+    # Handle connections to the database and save devices
+    with DbTests() as database:
+        # Store device info in the database
+        database.add_new_device("asdf-rtr01", "Cisco", "2921")
+        database.add_new_device("asdf-rtr02", "Cisco", "2921")
+        database.add_new_device("asdf-dsw01", "Cisco", "3560")
+        database.add_new_device("asdf-dsw02", "Cisco", "3560")
+
+        # Get info on all devices and print
+        all_devices = database.get_all_devices()
+        print(all_devices)
+        # Output:
+        # [('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'),
+        # ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
+
+        # Delete everything in the database
+        print("Clearing devices...")
+        database.clear_devices()
+
+        # Show that nothing is in the database
+        all_devices = database.get_all_devices()
+        print(all_devices)
+        # Output:
+        # []
+```
+
+## Run:
+
+```bash
+python .\basic_sqlite3_test.py
+```
+
 ### Resources:
 
 Corey Schafer - https://www.youtube.com/watch?v=pd-0G0MigUA
