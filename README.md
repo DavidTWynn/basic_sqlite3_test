@@ -51,4 +51,4 @@ Corey Schafer - https://www.youtube.com/watch?v=pd-0G0MigUA
 
 SQLite docs - https://www.sqlite.org/docs.html
 
-DigitalOcean - How to use sqlite 3 - https://www.digitalocean.com/community/tutorials/how-to-use-the-sqlite3-module-in-python-3
+DigitalOcean - https://www.digitalocean.com/community/tutorials/how-to-use-the-sqlite3-module-in-python-3
