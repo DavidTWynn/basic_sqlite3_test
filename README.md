@@ -1,4 +1,8 @@
 # Working on learning SQLite3
+![GitHub last commit](https://img.shields.io/github/last-commit/davidtwynn/basic_sqlite3_test?style=plastic)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/davidtwynn/basic_sqlite3_test?style=plastic)
+![Python version](https://img.shields.io/badge/python%20version-3.10-blue)
+![Coding style](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 Just a place for some basic examples
 
