@@ -28,6 +28,10 @@ Just a place for some basic examples
         # [('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'),
         # ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
 
+        # Commit database changes
+        print("Committing database changes...")
+        database.commit()
+
         # Delete everything in the database
         print("Clearing devices...")
         database.clear_devices()
@@ -37,12 +41,21 @@ Just a place for some basic examples
         print(all_devices)
         # Output:
         # []
+
+        # Commit changes
+        print("Committing database changes...")
+        database.commit()
 ```
 
 ## Run:
 
 ```bash
-python .\basic_sqlite3_test.py
+> python .\basic_sqlite3_test.py
+[('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'), ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
+Committing database changes...
+Clearing devices...
+[]
+Committing database changes...
 ```
 
 ### Resources:

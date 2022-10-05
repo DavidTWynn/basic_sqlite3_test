@@ -17,6 +17,10 @@ def main():
         # [('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'),
         # ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
 
+        # Commit database changes
+        print("Committing database changes...")
+        database.commit()
+
         # Delete everything in the database
         print("Clearing devices...")
         database.clear_devices()
@@ -27,11 +31,18 @@ def main():
         # Output:
         # []
 
+        # Commit changes
+        print("Committing database changes...")
+        database.commit()
+
 
 class DbTests:
     def __init__(self, db_name: str = "database.db"):
         """Sets up database object. Creates database.db in current dir
         if not specified.
+
+        Creates connection and cursor on enter,
+        closes connection on exit.
 
         Example:\n
         with DbTests() as database:\n
@@ -42,7 +53,8 @@ class DbTests:
 
     def __enter__(self):
         """Context manager to establish DB connection"""
-        self.cursor = self._connect_to_db()
+        self.connection = self._connect_to_db()
+        self.cursor = self._get_cursor()
         return self
 
     def __exit__(self, exc_type, exc_value, exc_tb):
@@ -50,6 +62,7 @@ class DbTests:
         self.cursor.close()
 
     def add_new_device(self, hostname, vendor, model):
+        """Adds new entry to the devices table"""
         self.cursor.execute(
             f"INSERT INTO devices VALUES ('{hostname}', '{vendor}', '{model}')"
         )
@@ -60,16 +73,24 @@ class DbTests:
         command = "SELECT * FROM devices"
         return self.cursor.execute(command).fetchall()
 
+    def commit(self) -> bool:
+        """Commits changes to database."""
+        self.connection.commit()
+        return True
+
     def clear_devices(self):
         """Deletes all entries in the devices table."""
         command = "DELETE FROM devices"
         self.cursor.execute(command)
 
-    def _connect_to_db(self) -> sqlite3.Cursor:
+    def _connect_to_db(self) -> sqlite3.Connection:
         """Connects to file location of sqlite3 database"""
         connection = sqlite3.connect(self.db_name)
-        cursor = connection.cursor()
-        return cursor
+        return connection
+
+    def _get_cursor(self) -> sqlite3.Cursor:
+        """Returns the cursor object from a current db connection"""
+        return self.connection.cursor()
 
     def _create_new_table(self):
         """Creates new table for sqlite3 database to store device info"""
