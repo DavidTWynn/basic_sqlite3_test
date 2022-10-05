@@ -51,6 +51,9 @@ Just a place for some basic examples
 
 ```bash
 > python .\basic_sqlite3_test.py
+```
+#### Output:
+```bash
 [('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'), ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
 Committing database changes...
 Clearing devices...
