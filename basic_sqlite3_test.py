@@ -1,6 +1,33 @@
 import sqlite3
 
 
+def main():
+    # Handle connections to the database and save devices
+    with DbTests() as database:
+        # Store device info in the database
+        database.add_new_device("asdf-rtr01", "Cisco", "2921")
+        database.add_new_device("asdf-rtr02", "Cisco", "2921")
+        database.add_new_device("asdf-dsw01", "Cisco", "3560")
+        database.add_new_device("asdf-dsw02", "Cisco", "3560")
+
+        # Get info on all devices and print
+        all_devices = database.get_all_devices()
+        print(all_devices)
+        # Output:
+        # [('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'),
+        # ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
+
+        # Delete everything in the database
+        print("Clearing devices...")
+        database.clear_devices()
+
+        # Show that nothing is in the database
+        all_devices = database.get_all_devices()
+        print(all_devices)
+        # Output:
+        # []
+
+
 class DbTests:
     def __init__(self, db_name: str = "database.db"):
         """Sets up database object. Creates database.db in current dir
@@ -50,33 +77,6 @@ class DbTests:
             "CREATE TABLE devices (hostname TEXT, vendor TEXT, model TEXT)"
         )
         return True
-
-
-def main():
-    # Handle connections to the database and save devices
-    with DbTests() as database:
-        # Store device info in the database
-        database.add_new_device("asdf-rtr01", "Cisco", "2921")
-        database.add_new_device("asdf-rtr02", "Cisco", "2921")
-        database.add_new_device("asdf-dsw01", "Cisco", "3560")
-        database.add_new_device("asdf-dsw02", "Cisco", "3560")
-
-        # Get info on all devices and print
-        all_devices = database.get_all_devices()
-        print(all_devices)
-        # Output:
-        # [('asdf-rtr01', 'Cisco', '2921'), ('asdf-rtr02', 'Cisco', '2921'),
-        # ('asdf-dsw01', 'Cisco', '3560'), ('asdf-dsw02', 'Cisco', '3560')]
-
-        # Delete everything in the database
-        print("Clearing devices...")
-        database.clear_devices()
-
-        # Show that nothing is in the database
-        all_devices = database.get_all_devices()
-        print(all_devices)
-        # Output:
-        # []
 
 
 if __name__ == "__main__":
